@@ -7,7 +7,7 @@ use watoki\factory\Injector;
 abstract class Specification extends \PHPUnit_Framework_TestCase {
 
     /** @var \watoki\scrut\FixtureProvider */
-    private $provider;
+    protected $fixtureProvider;
 
     /** @var Factory */
     public $factory;
@@ -24,8 +24,8 @@ abstract class Specification extends \PHPUnit_Framework_TestCase {
 
         $factory = new Factory();
 
-        $this->provider = new FixtureProvider($this, $factory);
-        $factory->setProvider(Fixture::$CLASS, $this->provider);
+        $this->fixtureProvider = new FixtureProvider($this, $factory);
+        $factory->setProvider(Fixture::$CLASS, $this->fixtureProvider);
 
         $injector = new Injector($factory);
         $injector->injectPropertyAnnotations($this, array($this, 'annotationPropertyFilter'));
@@ -83,7 +83,7 @@ abstract class Specification extends \PHPUnit_Framework_TestCase {
      * @param callable $do
      */
     private function onFixtures($do) {
-        foreach ($this->provider->getProvidedFixtures() as $fixture) {
+        foreach ($this->fixtureProvider->getProvidedFixtures() as $fixture) {
             $do($fixture);
         }
     }
