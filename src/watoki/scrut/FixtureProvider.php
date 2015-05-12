@@ -21,7 +21,7 @@ class FixtureProvider extends DefaultProvider {
 
     public function provide($class, array $args = array()) {
         $instance = parent::provide($class, array('spec' => $this->spec));
-        $this->factory->setSingleton($class, $instance);
+        $this->factory->setSingleton($instance, $class);
 
         $this->providedFixtures[] = $instance;
 
