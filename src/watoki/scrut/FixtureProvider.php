@@ -14,7 +14,7 @@ class FixtureProvider extends DefaultProvider {
     private $providedFixtures = array();
 
     function __construct(Specification $spec, Factory $factory) {
-        parent::__construct($factory, true);
+        parent::__construct($factory);
         $this->factory = $factory;
         $this->spec = $spec;
     }
